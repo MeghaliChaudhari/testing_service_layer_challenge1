@@ -1,9 +1,10 @@
-package com.example.springmongodemo.challenge1.repository;
+package com.example.springmongodemo.challenge1.service;
 
 import com.example.springmongodemo.challenge1.domain.Artist;
 import com.example.springmongodemo.challenge1.domain.Track;
 import com.example.springmongodemo.challenge1.exception.TrackAlreadyExistsException;
 import com.example.springmongodemo.challenge1.exception.TrackNotFoundException;
+import com.example.springmongodemo.challenge1.repository.TrackRepository;
 import com.example.springmongodemo.challenge1.service.TrackServiceImpl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -78,6 +79,7 @@ public class TrackServiceTest {
     public void deleteTrackFailureTest(){
         when(trackRepository.findById(track1.getTrackId())).thenReturn(Optional.ofNullable(track1));
         assertThrows(TrackNotFoundException.class,()-> trackService.deleteTrackById(track1.getTrackId()));
+
         verify(trackRepository,times(0)).deleteById(any());
         verify(trackRepository,times(1)).findById(any());
     }
