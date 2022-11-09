@@ -34,7 +34,7 @@ public class TrackServiceImpl implements TrackService{
     public boolean deleteTrackById(int trackId) throws TrackNotFoundException {
 
         boolean res = false;
-        if (trackRepository.findById(trackId).isEmpty()){
+        if (trackRepository.findById(trackId).isPresent()){
             throw new TrackNotFoundException();
         }else {
             trackRepository.deleteById(trackId);
